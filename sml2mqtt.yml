@@ -1,0 +1,39 @@
+logging:
+  level: INFO                    # Log level
+  file: sml2mqtt.log             # Log file path (absolute or relative to config file)
+
+mqtt:
+  connection:
+    client id: sml2mqtt
+    host: localhost
+    port: 1883
+    user: ''
+    password: ''
+    tls: false
+    tls insecure: false
+
+  # MQTT default configuration
+  # All other topics use these values if no other values for qos/retain are set
+  # It's possible to override
+  #  - topic        (fragment that is used to build the full mqtt topic)
+  #  - full_topic   (will not build the topic from the fragments but rather use the configured value)
+  #  - qos
+  #  - retain
+  # for each (!) mqtt-topic entry
+  defaults:
+    qos: 0
+    retain: false
+  topic prefix: sml2mqtt
+
+  last will:
+    topic: status
+
+general:
+  Wh in kWh: true                  # Automatically convert Wh to kWh
+  republish after: 120             # Republish automatically after this time (if no other every filter is configured)
+
+# Serial port configurations for the sml readers
+ports:
+- url: ./sml.raw
+  timeout: 3
+
